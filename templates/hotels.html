@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hotel Guide</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: #12355b;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+        .city {
+            text-align: center;
+            color: #12355b;
+        }
+
+        /* BUDGET */
+
+        .budget {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .budget a {
+            display: inline-block;
+            margin: 7px;
+            padding: 12px 25px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: white;
+            background: #12355b;
+            font-weight: bold;
+        }
+
+        .budget a:hover {
+            background: #1d527f;
+        }
+
+        .current {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #12355b;
+            margin-bottom: 25px;
+        }
+
+        /* HOTEL CARDS */
+
+        .hotels {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+        }
+
+        .hotel-icon {
+            text-align: center;
+            font-size: 48px;
+        }
+
+        .card h2 {
+            color: #12355b;
+            text-align: center;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .price {
+            color: #188038;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        .rating {
+            color: #e69500;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            width: 180px;
+            margin: 40px auto;
+            padding: 13px;
+            text-align: center;
+            background: #12355b;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        🏨 HOTEL GUIDE
+    </h1>
+
+    <p>
+        Find Hotels in {{ city }}
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <h2 class="city">
+        📍 {{ city }}
+    </h2>
+
+
+    <!-- BUDGET OPTIONS -->
+
+    <div class="budget">
+
+        <a href="/hotels?city={{ city }}&budget=Low">
+            LOW BUDGET
+        </a>
+
+        <a href="/hotels?city={{ city }}&budget=Medium">
+            MEDIUM BUDGET
+        </a>
+
+        <a href="/hotels?city={{ city }}&budget=High">
+            HIGH BUDGET
+        </a>
+
+    </div>
+
+
+    <div class="current">
+
+        {{ budget }} BUDGET HOTELS
+
+    </div>
+
+
+    <!-- HOTEL LIST -->
+
+    <div class="hotels">
+
+
+        {% for hotel in hotels %}
+
+        <div class="card">
+
+            <div class="hotel-icon">
+                🏨
+            </div>
+
+            <h2>
+                {{ hotel.name }}
+            </h2>
+
+            <p class="price">
+                💰 {{ hotel.price }}
+            </p>
+
+            <p class="rating">
+                ⭐ {{ hotel.rating }} / 5
+            </p>
+
+            <p>
+                📍 {{ city }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+        {% if not hotels %}
+
+        <p>
+            No hotels available.
+        </p>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <a
+        href="/"
+        class="back"
+    >
+        ← BACK TO HOME
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
