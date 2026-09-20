@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Trip Planner</title>
+</head>
+<body>
+
+    <h1>TRIP PLANNER</h1>
+
+    <form method="POST">
+
+        <label>Select Destination:</label>
+
+        <select name="city">
+            <option value="Chennai">Chennai</option>
+            <option value="Madurai">Madurai</option>
+            <option value="Ooty">Ooty</option>
+        </select>
+
+        <br><br>
+
+        <label>Number of Days:</label>
+
+        <input type="number" name="days" min="1" max="10">
+
+        <br><br>
+
+        <label>Budget:</label>
+
+        <select name="budget">
+            <option value="Low Budget">Low Budget</option>
+            <option value="Medium Budget">Medium Budget</option>
+            <option value="High Budget">High Budget</option>
+        </select>
+
+        <br><br>
+
+        <button type="submit">PLAN MY TRIP</button>
+
+    </form>
+
+    {% if result %}
+
+        <h2>YOUR TRIP PLAN</h2>
+
+        <p><b>Destination:</b> {{ result.city }}</p>
+
+        <p><b>Number of Days:</b> {{ result.days }}</p>
+
+        <p><b>Budget:</b> {{ result.budget }}</p>
+
+        <h3>Places to Visit</h3>
+
+        <ul>
+            {% for place in result.places %}
+                <li>{{ place }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endif %}
+
+    <br>
+    <a href="/">HOME</a>
+
+</body>
+</html>
