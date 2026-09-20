@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Tourist Guide</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            background: #12355b;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        /* HERO */
+
+        .hero {
+            background: linear-gradient(135deg, #12355b, #1d527f);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 18px;
+        }
+
+        /* CITY */
+
+        .city-section {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .city-section h2 {
+            color: #12355b;
+        }
+
+        .city-form select {
+            width: 280px;
+            padding: 14px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .city-form button {
+            padding: 14px 25px;
+            margin-left: 8px;
+            border: none;
+            border-radius: 7px;
+            background: #12355b;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* FEATURES */
+
+        .features {
+            padding: 30px 40px 70px;
+            text-align: center;
+        }
+
+        .features h2 {
+            color: #12355b;
+            margin-bottom: 35px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 260px;
+            min-height: 280px;
+            padding: 30px 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.12);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #12355b;
+            font-size: 21px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.5;
+            min-height: 50px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 25px;
+            background: #12355b;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .card-btn:hover {
+            background: #1d527f;
+        }
+
+        /* SELECTED CITY */
+
+        .selected {
+            text-align: center;
+            color: #12355b;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #12355b;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        🌍 AI TOURIST GUIDE
+    </div>
+
+</nav>
+
+
+<!-- TITLE -->
+
+<section class="hero">
+
+    <h1>
+        AI-BASED TOURIST GUIDE SYSTEM
+    </h1>
+
+    <p>
+        Smart Travel Planning Made Easy
+    </p>
+
+</section>
+
+
+<!-- CITY SELECTION -->
+
+<section class="city-section">
+
+    <h2>
+        SELECT YOUR DESTINATION
+    </h2>
+
+    <form
+        action="/select-city"
+        method="POST"
+        class="city-form"
+    >
+
+        <select name="city" required>
+
+            <option value="">
+                Select City
+            </option>
+
+            <option value="Chennai">
+                Chennai
+            </option>
+
+            <option value="Coimbatore">
+                Coimbatore
+            </option>
+
+            <option value="Madurai">
+                Madurai
+            </option>
+
+        </select>
+
+        <button type="submit">
+            SELECT
+        </button>
+
+    </form>
+
+
+    {% if selected_city %}
+
+        <p class="selected">
+            📍 Selected Destination:
+            {{ selected_city }}
+        </p>
+
+    {% endif %}
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="features">
+
+    <h2>
+        EXPLORE FEATURES
+    </h2>
+
+
+    <div class="cards">
+
+
+        <!-- TOURIST PLACES -->
+
+        <div class="card">
+
+            <div class="icon">
+                🏝️
+            </div>
+
+            <h3>
+                TOURIST PLACES
+            </h3>
+
+            <p>
+                Explore popular tourist places
+                in your selected destination.
+            </p>
+
+            <a
+                href="/places?city={{ selected_city or 'Chennai' }}"
+                class="card-btn"
+            >
+                EXPLORE
+            </a>
+
+        </div>
+
+
+        <!-- HOTELS -->
+
+        <div class="card">
+
+            <div class="icon">
+                🏨
+            </div>
+
+            <h3>
+                HOTEL GUIDE
+            </h3>
+
+            <p>
+                Find hotels based on your
+                selected budget.
+            </p>
+
+            <a
+                href="/hotels?city={{ selected_city or 'Chennai' }}"
+                class="card-btn"
+            >
+                VIEW HOTELS
+            </a>
+
+        </div>
+
+
+        <!-- FOOD -->
+
+        <div class="card">
+
+            <div class="icon">
+                🍴
+            </div>
+
+            <h3>
+                FOOD GUIDE
+            </h3>
+
+            <p>
+                Discover popular local foods
+                in your destination.
+            </p>
+
+            <a
+                href="/food?city={{ selected_city or 'Chennai' }}"
+                class="card-btn"
+            >
+                EXPLORE FOOD
+            </a>
+
+        </div>
+
+
+        <!-- AI RECOMMENDATION -->
+
+        <div class="card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h3>
+                AI RECOMMENDATION
+            </h3>
+
+            <p>
+                Get tourist place recommendations
+                for your destination.
+            </p>
+
+            <a
+                href="/recommend?city={{ selected_city or 'Chennai' }}"
+                class="card-btn"
+            >
+                GET RECOMMENDATION
+            </a>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <b>
+        AI-BASED TOURIST GUIDE SYSTEM
+    </b>
+
+    <p>
+        Smart Travel • Easy Planning • Better Experience
+    </p>
+
+</footer>
+
+
+</body>
+
+</html>
