@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AI Recommendation</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+        }
+
+        .header {
+            background: #12355b;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        .city {
+            text-align: center;
+            color: #12355b;
+            margin-bottom: 35px;
+        }
+
+        .recommendations {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            width: 270px;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.10);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+        }
+
+        .icon {
+            text-align: center;
+            font-size: 48px;
+        }
+
+        .card h2 {
+            color: #12355b;
+            text-align: center;
+        }
+
+        .card p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eaf0f6;
+            color: #12355b;
+            padding: 7px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            width: 180px;
+            margin: 40px auto;
+            padding: 13px;
+            text-align: center;
+            background: #12355b;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>
+        🤖 AI RECOMMENDATION
+    </h1>
+
+    <p>
+        Recommended Places for Your Trip
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <h2 class="city">
+        📍 {{ city }}
+    </h2>
+
+
+    <div class="recommendations">
+
+
+        {% for place in places %}
+
+        <div class="card">
+
+            <div class="icon">
+                🤖
+            </div>
+
+            <h2>
+                {{ place.name }}
+            </h2>
+
+            <p>
+                <b>Location:</b>
+                {{ place.location }}
+            </p>
+
+            <p>
+                <span class="tag">
+                    {{ place.type }}
+                </span>
+            </p>
+
+            <p>
+                Recommended based on your
+                selected destination.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+        {% if not places %}
+
+        <p>
+            No recommendations available.
+        </p>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <a
+        href="/"
+        class="back"
+    >
+        ← BACK TO HOME
+    </a>
+
+
+</div>
+
+
+</body>
+
+</html>
